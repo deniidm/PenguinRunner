@@ -1,0 +1,5 @@
+﻿  Obstacle.cpp
+  main.cpp
+C:\Users\menta\source\repos\SFML\SFML\main.cpp(15,16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+  SFML.vcxproj -> C:\Users\menta\source\repos\SFML\Debug\SFML.exe
