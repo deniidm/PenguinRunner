@@ -15,9 +15,10 @@ int main()
      srand(time(NULL));
     
      Player player(&playerTexture, sf::Vector2u(3, 9), 0.3f , 100.0f , 150.f);
+     
      float deltaTime = 0.0f;
      sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(650.0f, 650.0f));
-     sf::Clock clock;
+     sf::Clock clock , clock2;
      sf::CircleShape circle;
      circle.setRadius(25.f);
      circle.setFillColor(sf::Color::Yellow);
@@ -28,12 +29,13 @@ int main()
      sf::RectangleShape rect;
      rect.setSize(sf::Vector2f(50.f , 50.f));
      rect.setTexture(&texture);
-     sf::Texture ground;
-     sf::Texture obstacleTexture;
+     sf::Texture obstacleTexture2;
+     sf::Texture obstacleTexture1;
+     obstacleTexture2.loadFromFile("obstacle2.png");
      
-     obstacleTexture.loadFromFile("obstacle.png");
-     Obstacle obstacle1(obstacleTexture);
-     
+     obstacleTexture1.loadFromFile("obstacle.png");
+     Obstacle obstacle1(obstacleTexture1 , 200);
+    
      while (window.isOpen())
     {
         deltaTime = clock.getElapsedTime().asSeconds();
@@ -57,8 +59,13 @@ int main()
       
         }
         player.Update(deltaTime);
-        sf::Vector2f vector(player.GetPosition().x + 200.f, player.GetPosition().y);
+        sf::Vector2f vector(player.GetPosition().x + 500.f, player.GetPosition().y + 220);
         obstacle1.SetPostion(vector);
+        if (clock2.getElapsedTime().asSeconds() > 0.3)
+        {
+            obstacle1.UpdateTexture(obstacleTexture1, obstacleTexture2);
+            clock2.restart();
+        }
         platforms.push_back( Platform(nullptr, sf::Vector2f(1200.f, 250.f), sf::Vector2f(player.GetPosition().x , 500.f)));
         sf::Vector2f direction;
         for (Platform& platform : platforms)
@@ -76,6 +83,7 @@ int main()
         
         window.setView(view);
         player.Draw(window);
+        obstacle1.Update(deltaTime);
         obstacle1.Draw(window);
         for (Platform& platform : platforms)
         {
@@ -89,14 +97,7 @@ int main()
         
     }
   
-     /*Game game;
-    
+   
      
-     while (game.GameRunning())
-     {
-         game.Update(clock);
-         game.Draw();
-     }
-     */
     return 0;
 }
