@@ -9,8 +9,8 @@
 int main()
 {
     
-    sf::RenderWindow window(sf::VideoMode(512, 512), "SFML", sf::Style::Default | sf::Style::Resize | sf::Style::Close);
-     
+        sf::RenderWindow window(sf::VideoMode(512, 512), "SFML", sf::Style::Default | sf::Style::Resize | sf::Style::Close);
+    //comment
      sf::Texture playerTexture;
      playerTexture.loadFromFile("C:\\Users\\menta\\source\\repos\\PenguinRunner\\photos\\tux_from_linux.png");
      srand(time(NULL));
